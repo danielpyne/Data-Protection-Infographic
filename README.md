@@ -1,17 +1,22 @@
-# Data Protection Infographic for Hair Professionals (Enhanced Background)
+# Data Protection for Hair Professionals — Muted, Interactive Infographic
 
-This interactive infographic provides guidance on data protection practices for hair professionals, now with a more visible subtle background pattern.
+This package contains a single-file, brand-aligned infographic you can publish with GitHub Pages and embed into Genially.
 
-## Features
-- Subtle grey radial gradient pattern in the background
-- Card hover animations and shadows
-- Brand fonts (Alta-Regular for titles, Perpetua for text)
-- Coloured cards with contextual interactivity
+## Design
+- Muted pastel **background cards** only (no coloured text). All text is **black** for consistent readability.
+- Subtle **full-page pattern** with adjustable intensity.
+- Headings set in **Alta-Regular** (fallbacks included); body text in **Perpetua**.
 
-## How to publish
-1. Upload these files to a new GitHub repository.
-2. Enable GitHub Pages (Settings → Pages → Source: main branch, root).
-3. Your infographic will be live at `https://USERNAME.github.io/REPO-NAME/`.
+## Interactivity
+- Hover **tooltips** explaining key terms.
+- **Accordion** scenarios and breach examples.
+- Persistent **compliance checklist** with progress bar (saved to localStorage).
+- **Copy-to-clipboard** mini privacy notice and request log templates.
+
+## Publish to GitHub Pages
+1. Create a new repo and upload `index.html` (and this README).
+2. In **Settings → Pages**, set Source to **Deploy from a branch**, Branch: `main`, Folder: `/ (root)`.
+3. Your site will be available at `https://USERNAME.github.io/REPO-NAME/`.
 
 ## Embed in Genially
-Use the GitHub Pages URL in Genially → Insert → Others → Embed.
+Use the Pages URL in **Insert → Others → Embed**. If you need an iframe snippet, ask and I’ll generate one for your exact URL.

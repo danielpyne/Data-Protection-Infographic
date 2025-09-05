@@ -5,138 +5,413 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Data Protection for Hair Professionals · Interactive Infographic</title>
   <style>
-    body {
-      margin: 0;
-      font-family: "Perpetua", Georgia, serif;
-      background: #ffffff;
-      color: #0b0b0c;
-      line-height: 1.6;
-      background-image: radial-gradient(circle at 20% 20%, #e6e6e6 0%, #ffffff 40%), 
-                        radial-gradient(circle at 80% 80%, #ececec 0%, #ffffff 40%);
-      background-attachment: fixed;
+    /* ====== Brand & Base ====== */
+    :root{
+      --fg:#0b0b0c;                 /* black text everywhere */
+      --bg:#ffffff;
+      --muted:#4b4e53;
+      --border:#dcdcdc;
+      --radius:16px;
+      --gap:16px;
+
+      /* Muted/pastel background colours (for cards only) */
+      --p1:#E7F2FF;  /* soft blue */
+      --p2:#F2E9FF;  /* soft lavender */
+      --p3:#FFF3D9;  /* soft sand */
+      --p4:#EAF7F1;  /* soft mint */
+      --p5:#FFECEE;  /* soft rose */
+      --p6:#F1F5E8;  /* soft sage */
     }
-    h1, h2, h3 {
-      font-family: "Alta-Regular", Georgia, serif;
-      font-weight: 400;
-      color: #0b0b0c;
+
+    html, body {height:100%;}
+    body{
+      margin:0;
+      font-family:"Perpetua", Georgia, serif;    /* Body copy */
+      color:var(--fg);
+      background:var(--bg);
+      line-height:1.6;
     }
-    .wrap {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px;
+    /* full-page patterned background overlay */
+    .bg-pattern{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(1000px 700px at 12% 18%, rgba(0,0,0,.06), transparent 60%),
+        radial-gradient(900px 600px at 88% 82%, rgba(0,0,0,.05), transparent 55%),
+        repeating-linear-gradient(45deg, rgba(0,0,0,.035) 0 1px, transparent 1px 14px);
+      opacity:.55; /* adjustable via slider */
     }
-    .section {
-      border-radius: 18px;
-      padding: 24px;
-      margin-bottom: 24px;
-      border: 1px solid #ccc;
-      background: #ffffffcc;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+
+    .wrap{
+      position:relative; z-index:1;
+      box-sizing:border-box;
+      width:min(1120px, 100%);
+      margin:0 auto;
+      padding: clamp(14px, 2.5vw, 28px);
+      display:grid;
+      gap:var(--gap);
+      grid-template-rows:auto auto auto 1fr auto;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
+
+    header{
+      border:1px solid var(--border);
+      border-radius: calc(var(--radius) + 2px);
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(3px);
+      padding:20px;
     }
-    .tip {
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid #ddd;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+    h1,h2,h3{ font-family:"Alta-Regular", Georgia, serif; font-weight:400; margin:0 0 6px 0;}
+    h1{ font-size: clamp(24px, 3.4vw, 36px); }
+    h2{ font-size: clamp(18px, 2.2vw, 24px); margin-top:4px;}
+    h3{ font-size: 18px; }
+
+    .muted{ color:var(--muted); font-size:14px; }
+
+    /* Controls */
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fafafa;
+      padding:12px;
     }
-    .tip:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
-    .tip h3 { margin-top: 0; font-size: 20px; }
-    .tip p { font-size: 14px; }
-    .tip.light { color: #0b0b0c; }
-    .interactive-info {
-      margin-top: 12px;
-      font-size: 13px;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
+    .controls label{ font-size:13px; color:var(--muted); margin-right:6px;}
+    .controls input[type="range"]{
+      width:180px; accent-color:#666;
     }
-    .tip:hover .interactive-info { display: block; opacity: 1; }
-    footer {
-      text-align:center;
-      font-size:12px;
-      opacity:0.7;
-      margin-top:20px;
+    .btn{
+      font: inherit;
+      background:#111; color:#fff;
+      border:0; border-radius:12px;
+      padding:8px 12px; cursor:pointer;
     }
+    .btn.secondary{ background:#f0f0f0; color:#111; border:1px solid var(--border); }
+
+    /* Grids & panels */
+    .grid{ display:grid; gap:var(--gap); }
+    .grid-2{ grid-template-columns: 1.2fr .8fr; }
+    .grid-3{ grid-template-columns: repeat(3,1fr); }
+    @media (max-width: 980px){ .grid-2{ grid-template-columns: 1fr; } }
+    @media (max-width: 760px){ .grid-3{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      padding:14px;
+    }
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+
+    /* Card styles (muted coloured boxes) */
+    .cards{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:var(--gap); }
+    .card{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      padding:14px;
+      background:var(--p1);
+      transition: transform .25s ease, box-shadow .25s ease;
+      position:relative; overflow:hidden;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,.08); }
+    .card .icon{ font-size:22px; margin-right:6px; }
+    .card.p2{ background:var(--p2); }
+    .card.p3{ background:var(--p3); }
+    .card.p4{ background:var(--p4); }
+    .card.p5{ background:var(--p5); }
+    .card.p6{ background:var(--p6); }
+
+    /* Tooltip chips */
+    .tip{ border:1px dashed rgba(0,0,0,.25); border-radius:999px; padding:2px 8px; font-size:12px; cursor:help; }
+    .tooltip{ position:fixed; z-index:3; background:#fff; border:1px solid var(--border); border-radius:10px; padding:8px 10px; font-size:13px; box-shadow:0 6px 18px rgba(0,0,0,.12); max-width:280px; display:none; }
+
+    /* Accordion (details/summary) */
+    details{ border:1px solid var(--border); border-radius:12px; background:#fff; padding:10px 12px; }
+    summary{ list-style:none; cursor:pointer; }
+    summary::-webkit-details-marker{ display:none; }
+    summary .sumline{ display:flex; align-items:center; gap:8px; }
+    .caret{ transition: transform .25s; }
+    details[open] .caret{ transform: rotate(90deg); }
+
+    /* Checklist */
+    .checklist{ display:grid; gap:10px; }
+    .check{ display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:#fff; }
+    .check input{ width:18px; height:18px; }
+    .progress{ width:100%; height:10px; background:#f0f0f0; border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+    .bar{ height:100%; width:0%; background: #9fbcd4; transition: width .35s ease; }
+
+    /* Templates */
+    .template{ width:100%; min-height:110px; border:1px solid var(--border); border-radius:12px; padding:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:#fcfcfc; }
+    .tiny{ font-size:12px; color:var(--muted); }
   </style>
 </head>
 <body>
+  <div class="bg-pattern" id="bgPattern"></div>
+
   <div class="wrap">
-    <header class="section">
+    <header>
       <h1>Data Protection for Hair Professionals</h1>
-      <p>Understand your responsibilities for safeguarding client information and applying data protection principles in your salon.</p>
+      <p class="muted">A practical guide to understanding, enforcing, and applying data protection in your salon—using clear language, muted colour blocks, and interactive aids.</p>
     </header>
 
-    <section class="section">
-      <h2>What is Data Protection?</h2>
-      <p><strong>Data protection</strong> means keeping personal information safe, accurate, and used fairly. For hair professionals, this often includes client contact details, appointment records, health information (e.g., allergies), and payment details.</p>
-      <p>In the UK, the <strong>Data Protection Act 2018</strong> and <strong>UK GDPR</strong> set out how businesses must collect, store, and use personal data responsibly.</p>
+    <!-- CONTROLS -->
+    <section class="controls">
+      <div>
+        <label for="pat">Background pattern intensity</label>
+        <input id="pat" type="range" min="0" max="100" value="55" />
+      </div>
+      <button class="btn secondary" id="reset">Reset Checklist</button>
+      <span class="tiny">All text is black for consistent readability. Colours are used only as background accents.</span>
     </section>
 
-    <section class="section">
-      <h2>Key Principles</h2>
-      <div class="grid">
-        <div class="tip light" style="background:#7dfcff;">
-          <h3>Lawfulness & Fairness</h3>
-          <p>Only collect information that is necessary for your services and be transparent with clients.</p>
-          <div class="interactive-info">💡 Example: Explain why you need allergy details before a colour treatment.</div>
+    <!-- WHY IT MATTERS + PRINCIPLES -->
+    <section class="grid grid-2">
+      <div class="panel">
+        <div class="row">
+          <h2>What & Why</h2>
+          <span class="tip" data-tip="Personal data: any info that identifies a person (e.g., name, email, notes, photos).">What is personal data?</span>
         </div>
-        <div class="tip" style="background:#ff6ec7;">
-          <h3>Accuracy</h3>
-          <p>Ensure client information is up-to-date and correct.</p>
-          <div class="interactive-info">💡 Example: Confirm contact details at each appointment.</div>
+        <div class="cards">
+          <div class="card p1">
+            <h3><span class="icon">🔒</span>What is Data Protection?</h3>
+            <p>Collecting, using, and storing client information fairly and safely—only what you need and only for as long as needed.</p>
+          </div>
+          <div class="card p3">
+            <h3><span class="icon">🎯</span>Why it Matters</h3>
+            <p>Builds client trust, prevents fines or reputational harm, and improves record‑keeping quality (e.g., allergy and patch test notes).</p>
+          </div>
+          <div class="card p4">
+            <h3><span class="icon">📜</span>Key Principles</h3>
+            <ul>
+              <li>Be lawful, fair & transparent</li>
+              <li>Collect only what you need</li>
+              <li>Keep it accurate & up to date</li>
+              <li>Store it securely</li>
+              <li>Limit how long you keep it</li>
+              <li>Respect client rights</li>
+            </ul>
+          </div>
         </div>
-        <div class="tip light" style="background:#ffd966;">
-          <h3>Storage Limitation</h3>
-          <p>Keep data only for as long as necessary.</p>
-          <div class="interactive-info">💡 Example: Delete lapsed client details after a set period.</div>
+      </div>
+
+      <div class="panel">
+        <div class="row">
+          <h2>Common Data Types</h2>
+          <span class="tip" data-tip="Special category data (e.g., health) needs extra care and a clear basis to process.">Handle carefully</span>
         </div>
-        <div class="tip" style="background:#6fa8dc;">
-          <h3>Security</h3>
-          <p>Protect personal data against unauthorised access, loss, or damage.</p>
-          <div class="interactive-info">💡 Example: Use passwords on salon booking systems and lock paper files away.</div>
+        <div class="cards">
+          <div class="card p2">
+            <h3><span class="icon">👤</span>Client Records</h3>
+            <p>Names, contact details, appointment history, preferences.</p>
+          </div>
+          <div class="card p5">
+            <h3><span class="icon">🧪</span>Health Notes</h3>
+            <p>Allergies, patch test results. Keep minimal and secure; restrict who can view.</p>
+          </div>
+          <div class="card p6">
+            <h3><span class="icon">💳</span>Payments</h3>
+            <p>Use reputable processors; avoid storing full card details on local devices.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>How to Apply in the Workplace</h2>
-      <div class="grid">
-        <div class="tip light" style="background:#93c47d;">
-          <h3>Training Staff</h3>
-          <p>Ensure all team members understand data protection rules and salon policies.</p>
-          <div class="interactive-info">💡 Hold regular refreshers and include data protection in new staff inductions.</div>
+    <!-- APPLY & ENFORCE -->
+    <section class="panel">
+      <div class="row">
+        <h2>Apply & Enforce in Your Salon</h2>
+        <span class="tip" data-tip="‘Need-to-know’ access: only the staff who need the data for their role should access it.">Access control</span>
+      </div>
+      <div class="cards">
+        <div class="card p4">
+          <h3><span class="icon">📋</span>Policy & Training</h3>
+          <p>Have a simple written policy; induct new staff and run refreshers. Include how to handle client requests.</p>
         </div>
-        <div class="tip light" style="background:#e69138;">
-          <h3>Client Consent</h3>
-          <p>Gain clear consent for marketing and always allow clients to opt-out.</p>
-          <div class="interactive-info">💡 Use consent forms or checkboxes for promotional emails or texts.</div>
+        <div class="card p1">
+          <h3><span class="icon">✅</span>Consent & Notices</h3>
+          <p>Get clear opt‑in for marketing; provide a short privacy notice at reception/online.</p>
         </div>
-        <div class="tip" style="background:#8e7cc3;">
-          <h3>Secure Disposal</h3>
-          <p>Dispose of personal data securely when no longer needed.</p>
-          <div class="interactive-info">💡 Shred paper records and wipe old devices before recycling.</div>
+        <div class="card p3">
+          <h3><span class="icon">🧹</span>Minimisation & Retention</h3>
+          <p>Collect only what’s needed; set a review schedule to remove outdated records.</p>
         </div>
-        <div class="tip light" style="background:#f6b26b;">
-          <h3>Privacy Notices</h3>
-          <p>Provide clients with clear information on how their data is used.</p>
-          <div class="interactive-info">💡 Example: Display a privacy policy at reception or on your booking system.</div>
+        <div class="card p2">
+          <h3><span class="icon">🛡️</span>Security Basics</h3>
+          <p>Strong passwords, screen locks, locked cabinets, encrypted backups, and verified third‑party apps.</p>
+        </div>
+        <div class="card p5">
+          <h3><span class="icon">🆘</span>Incident Response</h3>
+          <p>Know who to tell, what to record, and how to contain the issue. Log incidents and lessons learned.</p>
+        </div>
+        <div class="card p6">
+          <h3><span class="icon">📮</span>Client Rights</h3>
+          <p>Be ready to handle access/correction/deletion requests promptly and securely.</p>
         </div>
       </div>
     </section>
 
-    <footer>
-      Interactive infographic · Data Protection for Hair Professionals · Brand fonts and colour accents applied
-    </footer>
+    <!-- ACCORDIONS: SCENARIOS & BREACH EXAMPLES -->
+    <section class="grid grid-2">
+      <div class="panel">
+        <h2>Salon Scenarios</h2>
+        <div class="grid">
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> New client form (paper) </span></summary>
+            <p>Keep forms out of public view; file securely right away; transfer to digital where possible and shred originals.</p>
+          </details>
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> Using a booking app </span></summary>
+            <p>Choose reputable providers; enable 2FA; review access for leavers; ensure data is backed up and exportable.</p>
+          </details>
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> Allergy & patch test notes </span></summary>
+            <p>Record only relevant details; restrict staff access; review retention aligned to clinical relevance and policy.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Examples of Breaches</h2>
+        <div class="grid">
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> Emailing the wrong client </span></summary>
+            <p>Use BCC for newsletters; double‑check recipient lists; have a process to recall/notify if needed.</p>
+          </details>
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> Lost paper notes </span></summary>
+            <p>Use lockable folders and store centrally; minimise paper; keep a log of who removes files and why.</p>
+          </details>
+          <details>
+            <summary><span class="sumline"><span class="caret">▶</span> Unlocked device at reception </span></summary>
+            <p>Auto‑lock after short idle time; position screens away from public view; train staff on privacy awareness.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="panel">
+      <div class="row"><h2>Compliance Checklist</h2><span class="muted" id="progText">0% complete</span></div>
+      <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      <div class="checklist" id="checklist"></div>
+      <p class="tiny">Your checklist is saved in this browser (local only).</p>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section class="grid grid-2">
+      <div class="panel">
+        <div class="row"><h2>Privacy Notice (mini)</h2><button class="btn" data-copy="#tmpl-privacy">Copy</button></div>
+<textarea id="tmpl-privacy" class="template">We collect only the personal information we need to provide our services (e.g., contact details, appointment history, relevant health notes such as allergies). We keep your data secure, retain it only as long as necessary, and never sell it. You have rights to access, correct, or delete your data. For questions or requests, contact: [email/phone].</textarea>
+      </div>
+      <div class="panel">
+        <div class="row"><h2>Data Request Log</h2><button class="btn" data-copy="#tmpl-log">Copy</button></div>
+<textarea id="tmpl-log" class="template">Date | Requester | Type (access/correction/deletion) | Data scope | Completed by | Date completed | Notes</textarea>
+        <p class="tiny">Paste into a spreadsheet or keep as a shared document with restricted access.</p>
+      </div>
+    </section>
+
+    <footer class="muted">Interactive infographic · Muted colour blocks · All text black · Background pattern covers the full page</footer>
   </div>
+
+  <!-- Tooltip element -->
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <script>
+    // Pattern intensity control
+    const pat = document.getElementById('pat');
+    const bg = document.getElementById('bgPattern');
+    pat.addEventListener('input', () => { bg.style.opacity = (Number(pat.value)/100).toFixed(2); });
+
+    // Tooltips
+    const tip = document.getElementById('tooltip');
+    let tipActive = null;
+    function showTip(el, x, y){
+      tip.textContent = el.getAttribute('data-tip');
+      tip.style.display = 'block';
+      const pad = 12;
+      tip.style.left = (x + pad) + 'px';
+      tip.style.top = (y + pad) + 'px';
+    }
+    function hideTip(){ tip.style.display = 'none'; }
+    document.addEventListener('mouseover', (e) => {
+      const t = e.target.closest('.tip');
+      if (t){
+        tipActive = t;
+        showTip(t, e.clientX, e.clientY);
+      }
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (tipActive) showTip(tipActive, e.clientX, e.clientY);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest('.tip')) { tipActive = null; hideTip(); }
+    });
+
+    // Checklist
+    const CHECKS = [
+      'We have a short written data protection policy and train staff on it',
+      'We collect only necessary client data and keep it accurate',
+      'We secure devices and paper records (passwords, locks, backups)',
+      'We provide a clear privacy notice and obtain consent for marketing',
+      'We have a retention schedule and delete old records',
+      'We can handle client access/correction/deletion requests',
+      'We log incidents and have a simple response process'
+    ];
+    const list = document.getElementById('checklist');
+    const bar = document.getElementById('bar');
+    const progText = document.getElementById('progText');
+    const KEY = 'dp_checklist_v1';
+
+    function renderChecklist(){
+      const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+      list.innerHTML = '';
+      CHECKS.forEach((txt, i) => {
+        const row = document.createElement('div'); row.className='check';
+        const box = document.createElement('input'); box.type='checkbox'; box.id = 'c'+i;
+        box.checked = !!saved[i];
+        box.addEventListener('change', save);
+        const lab = document.createElement('label'); lab.setAttribute('for','c'+i); lab.textContent = txt;
+        row.appendChild(box); row.appendChild(lab);
+        list.appendChild(row);
+      });
+      updateProgress();
+    }
+
+    function save(){
+      const boxes = Array.from(list.querySelectorAll('input[type="checkbox"]')).map(b => b.checked);
+      localStorage.setItem(KEY, JSON.stringify(boxes));
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const boxes = list.querySelectorAll('input[type="checkbox"]');
+      const checked = Array.from(boxes).filter(b => b.checked).length;
+      const pct = Math.round((checked / boxes.length) * 100);
+      bar.style.width = pct + '%';
+      progText.textContent = pct + '% complete';
+    }
+
+    document.getElementById('reset').addEventListener('click', () => {
+      localStorage.removeItem(KEY);
+      renderChecklist();
+    });
+
+    // Copy buttons
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const sel = btn.getAttribute('data-copy');
+        const el = document.querySelector(sel);
+        try{
+          await navigator.clipboard.writeText(el.value);
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(()=> btn.textContent = old, 1000);
+        }catch(e){ window.prompt('Copy this text:', el.value); }
+      });
+    });
+
+    // Kickoff
+    renderChecklist();
+  </script>
 </body>
 </html>
