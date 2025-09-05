@@ -1,9 +1,9 @@
-# Data Protection Infographic for Hair Professionals (Enhanced Design)
+# Data Protection Infographic for Hair Professionals (Enhanced Background)
 
-This interactive infographic provides guidance on data protection practices for hair professionals, with a more visually engaging background and card design.
+This interactive infographic provides guidance on data protection practices for hair professionals, now with a more visible subtle background pattern.
 
 ## Features
-- Subtle patterned background with gradients
+- Subtle grey radial gradient pattern in the background
 - Card hover animations and shadows
 - Brand fonts (Alta-Regular for titles, Perpetua for text)
 - Coloured cards with contextual interactivity
