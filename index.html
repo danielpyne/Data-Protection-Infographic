@@ -11,6 +11,9 @@
       background: #ffffff;
       color: #0b0b0c;
       line-height: 1.6;
+      background-image: radial-gradient(circle at 20% 20%, #f2f2f2 0%, #ffffff 40%), 
+                        radial-gradient(circle at 80% 80%, #f9f9f9 0%, #ffffff 40%);
+      background-attachment: fixed;
     }
     h1, h2, h3 {
       font-family: "Alta-Regular", Georgia, serif;
@@ -18,40 +21,52 @@
       color: #0b0b0c;
     }
     .wrap {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
-      padding: 20px;
+      padding: 30px;
     }
     .section {
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 20px;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 24px;
       border: 1px solid #ccc;
-      background: #f9f9f9;
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
     }
     .tip {
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 18px;
       border: 1px solid #ddd;
       cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
       color: #fff;
+      position: relative;
+      overflow: hidden;
     }
-    .tip:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .tip h3 { margin-top: 0; font-size: 18px; }
+    .tip:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+    .tip h3 { margin-top: 0; font-size: 20px; }
     .tip p { font-size: 14px; }
     .tip.light { color: #0b0b0c; }
     .interactive-info {
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 13px;
       display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
     }
-    .tip:hover .interactive-info { display: block; }
+    .tip:hover .interactive-info { display: block; opacity: 1; }
+    footer {
+      text-align:center;
+      font-size:12px;
+      opacity:0.7;
+      margin-top:20px;
+    }
   </style>
 </head>
 <body>
@@ -70,7 +85,7 @@
     <section class="section">
       <h2>Key Principles</h2>
       <div class="grid">
-        <div class="tip" style="background:#7dfcff;" class="light">
+        <div class="tip light" style="background:#7dfcff;">
           <h3>Lawfulness & Fairness</h3>
           <p>Only collect information that is necessary for your services and be transparent with clients.</p>
           <div class="interactive-info">💡 Example: Explain why you need allergy details before a colour treatment.</div>
@@ -80,7 +95,7 @@
           <p>Ensure client information is up-to-date and correct.</p>
           <div class="interactive-info">💡 Example: Confirm contact details at each appointment.</div>
         </div>
-        <div class="tip" style="background:#ffd966;" class="light">
+        <div class="tip light" style="background:#ffd966;">
           <h3>Storage Limitation</h3>
           <p>Keep data only for as long as necessary.</p>
           <div class="interactive-info">💡 Example: Delete lapsed client details after a set period.</div>
@@ -96,12 +111,12 @@
     <section class="section">
       <h2>How to Apply in the Workplace</h2>
       <div class="grid">
-        <div class="tip" style="background:#93c47d;" class="light">
+        <div class="tip light" style="background:#93c47d;">
           <h3>Training Staff</h3>
           <p>Ensure all team members understand data protection rules and salon policies.</p>
           <div class="interactive-info">💡 Hold regular refreshers and include data protection in new staff inductions.</div>
         </div>
-        <div class="tip" style="background:#e69138;" class="light">
+        <div class="tip light" style="background:#e69138;">
           <h3>Client Consent</h3>
           <p>Gain clear consent for marketing and always allow clients to opt-out.</p>
           <div class="interactive-info">💡 Use consent forms or checkboxes for promotional emails or texts.</div>
@@ -109,18 +124,18 @@
         <div class="tip" style="background:#8e7cc3;">
           <h3>Secure Disposal</h3>
           <p>Dispose of personal data securely when no longer needed.</p>
-          <div class="interactive-info">💡 Shred paper records and wipe old devices before disposal.</div>
+          <div class="interactive-info">💡 Shred paper records and wipe old devices before recycling.</div>
         </div>
-        <div class="tip" style="background:#c27ba0;">
-          <h3>Policies & Records</h3>
-          <p>Maintain clear data protection policies and keep records of processing activities.</p>
-          <div class="interactive-info">💡 Review policies yearly and document how client data is used.</div>
+        <div class="tip light" style="background:#f6b26b;">
+          <h3>Privacy Notices</h3>
+          <p>Provide clients with clear information on how their data is used.</p>
+          <div class="interactive-info">💡 Example: Display a privacy policy at reception or on your booking system.</div>
         </div>
       </div>
     </section>
 
-    <footer style="text-align:center; font-size:12px; opacity:0.7;">
-      Interactive infographic · Embed into Genially · Brand theme applied
+    <footer>
+      Interactive infographic · Data Protection for Hair Professionals · Brand fonts and colour accents applied
     </footer>
   </div>
 </body>

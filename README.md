@@ -1,12 +1,12 @@
-# Data Protection Infographic for Hair Professionals
+# Data Protection Infographic for Hair Professionals (Enhanced Design)
 
-This interactive infographic provides guidance on data protection practices for hair professionals.
+This interactive infographic provides guidance on data protection practices for hair professionals, with a more visually engaging background and card design.
 
 ## Features
-- Overview of Data Protection and UK GDPR
-- Key principles explained with examples
-- Workplace application tips with interactive hovers
-- White background, brand fonts (Alta-Regular for titles, Perpetua for text)
+- Subtle patterned background with gradients
+- Card hover animations and shadows
+- Brand fonts (Alta-Regular for titles, Perpetua for text)
+- Coloured cards with contextual interactivity
 
 ## How to publish
 1. Upload these files to a new GitHub repository.
