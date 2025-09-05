@@ -15,37 +15,31 @@
     body{margin:0;font-family:"Perpetua", Georgia, serif;color:var(--fg);background:var(--bg);line-height:1.6;}
     .bg-pattern{position:fixed;inset:0;z-index:0;pointer-events:none;
       background-image:
-        radial-gradient(1000px 700px at 12% 18%, rgba(0,0,0,.06), transparent 60%),
-        radial-gradient(900px 600px at 88% 82%, rgba(0,0,0,.05), transparent 55%),
-        repeating-linear-gradient(45deg, rgba(0,0,0,.035) 0 1px, transparent 1px 14px);
+        radial-gradient(900px 600px at 20% 15%, rgba(0,0,0,.05), transparent 65%),
+        radial-gradient(900px 600px at 80% 85%, rgba(0,0,0,.04), transparent 55%),
+        repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 1px, transparent 1px 16px);
       opacity:.55;}
-    .wrap{position:relative;z-index:1;box-sizing:border-box;width:min(1120px, 100%);margin:0 auto;
-      padding: clamp(14px, 2.5vw, 28px);display:grid;gap:var(--gap);grid-template-rows:auto auto auto 1fr auto;}
-    header{border:1px solid var(--border);border-radius:calc(var(--radius) + 2px);background:rgba(255,255,255,.9);
-      backdrop-filter:blur(3px);padding:20px;}
+    .wrap{position:relative;z-index:1;width:min(1120px,100%);margin:0 auto;padding: clamp(14px,2.5vw,28px);display:grid;gap:var(--gap);}
+    header{border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.9);backdrop-filter:blur(3px);padding:20px;}
     h1,h2,h3{font-family:"Alta-Regular", Georgia, serif;font-weight:400;margin:0 0 6px 0;}
-    h1{font-size:clamp(24px, 3.4vw, 36px);}h2{font-size:clamp(18px, 2.2vw, 24px);}h3{font-size:18px;}
+    h1{font-size:clamp(24px,3.4vw,36px);}h2{font-size:clamp(18px,2.2vw,24px);}h3{font-size:18px;}
     .muted{color:var(--muted);font-size:14px;}
-    .grid{display:grid;gap:var(--gap);} .grid-2{grid-template-columns: 1.2fr .8fr;} .grid-3{grid-template-columns: repeat(3,1fr);}
-    @media (max-width: 980px){.grid-2{grid-template-columns: 1fr;}} @media (max-width: 760px){.grid-3{grid-template-columns: 1fr;}}
+    .grid{display:grid;gap:var(--gap);} .grid-2{grid-template-columns:1.2fr .8fr;}
+    @media(max-width:980px){.grid-2{grid-template-columns:1fr;}}
     .panel{border:1px solid var(--border);border-radius:var(--radius);background:#fff;padding:14px;}
     .row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px,1fr));gap:var(--gap);}
-    .card{border-radius:var(--radius);border:1px solid var(--border);padding:14px;background:var(--p1);
-      transition:transform .25s ease, box-shadow .25s ease;position:relative;overflow:hidden;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap);}
+    .card{border-radius:var(--radius);border:1px solid var(--border);padding:14px;background:var(--p1);transition:transform .25s, box-shadow .25s;position:relative;overflow:hidden;}
     .card:hover{transform:translateY(-4px);box-shadow:0 10px 20px rgba(0,0,0,.08);}
     .card .icon{font-size:22px;margin-right:6px;}
-    .card.p2{background:var(--p2);} .card.p3{background:var(--p3);} .card.p4{background:var(--p4);} 
-    .card.p5{background:var(--p5);} .card.p6{background:var(--p6);}
+    .card.p2{background:var(--p2);} .card.p3{background:var(--p3);} .card.p4{background:var(--p4);} .card.p5{background:var(--p5);} .card.p6{background:var(--p6);}
     details{border:1px solid var(--border);border-radius:12px;background:#fff;padding:10px 12px;}
     summary{list-style:none;cursor:pointer;}summary::-webkit-details-marker{display:none;}
     summary .sumline{display:flex;align-items:center;gap:8px;}.caret{transition:transform .25s;}details[open] .caret{transform:rotate(90deg);}
     .checklist{display:grid;gap:10px;}.check{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;}
     .check input{width:18px;height:18px;}
-    .progress{width:100%;height:10px;background:#f0f0f0;border-radius:999px;overflow:hidden;border:1px solid var(--border);} 
-    .bar{height:100%;width:0%;background:#9fbcd4;transition:width .35s ease;}
-    .template{width:100%;min-height:110px;border:1px solid var(--border);border-radius:12px;padding:10px;font-family:ui-monospace,monospace;background:#fcfcfc;}
-    .tiny{font-size:12px;color:var(--muted);}footer{text-align:center;font-size:12px;opacity:.7;margin-top:20px;}
+    .progress{width:100%;height:10px;background:#f0f0f0;border-radius:999px;overflow:hidden;border:1px solid var(--border);} .bar{height:100%;width:0%;background:#9fbcd4;transition:width .35s;}
+    footer{text-align:center;font-size:12px;opacity:.7;margin-top:20px;}
   </style>
 </head>
 <body>
@@ -53,10 +47,64 @@
   <div class="wrap">
     <header>
       <h1>Data Protection for Hair Professionals</h1>
-      <p class="muted">A practical guide to understanding, enforcing, and applying data protection in your salon.</p>
+      <p class="muted">A guide to data protection in the salon — covering legislation, importance, risks, and correct practices.</p>
     </header>
 
-    <!-- Example content trimmed for brevity: reuses previous layout with cards, panels, accordions -->
+    <section class="panel">
+      <h2>Legislation</h2>
+      <p>The <strong>Data Protection Act 2018</strong> and <strong>UK GDPR</strong> require salons to:</p>
+      <ul>
+        <li>Collect personal data fairly and lawfully.</li>
+        <li>Only use data for specified purposes.</li>
+        <li>Keep it accurate and up to date.</li>
+        <li>Store it securely and only as long as needed.</li>
+        <li>Respect client rights such as access and deletion.</li>
+      </ul>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="panel">
+        <h2>Why It Matters</h2>
+        <div class="cards">
+          <div class="card p2"><h3><span class="icon">🤝</span>Trust</h3><p>Builds client confidence knowing their data is safe.</p></div>
+          <div class="card p3"><h3><span class="icon">⚖️</span>Compliance</h3><p>Avoids fines and legal consequences of data breaches.</p></div>
+          <div class="card p4"><h3><span class="icon">💼</span>Professionalism</h3><p>Maintains a professional image and organised salon practice.</p></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Common Risks in Salons</h2>
+        <div class="cards">
+          <div class="card p5"><h3><span class="icon">📄</span>Paper Records</h3><p>Notes left on desks can expose personal details.</p></div>
+          <div class="card p6"><h3><span class="icon">💻</span>Devices</h3><p>Unprotected booking apps or lost laptops put client data at risk.</p></div>
+          <div class="card p1"><h3><span class="icon">📧</span>Emails</h3><p>Sending to wrong client or not using BCC in group emails risks breaches.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Correct Practices</h2>
+      <div class="cards">
+        <div class="card p1"><h3><span class="icon">📋</span>Privacy Notices</h3><p>Display clear notices about how client data is used.</p></div>
+        <div class="card p3"><h3><span class="icon">🎓</span>Staff Training</h3><p>Train all staff to handle data safely and follow policy.</p></div>
+        <div class="card p4"><h3><span class="icon">🗑️</span>Secure Disposal</h3><p>Shred paper files and wipe devices before disposal.</p></div>
+        <div class="card p2"><h3><span class="icon">✉️</span>Client Consent</h3><p>Gain opt-in for marketing; make opt-out easy.</p></div>
+      </div>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="panel">
+        <h2>Scenarios</h2>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Sending marketing emails</span></summary><p>Always use BCC and ensure only clients who opted-in are included.</p></details>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Using booking apps</span></summary><p>Choose reputable providers, enable passwords and 2FA.</p></details>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Recording allergy notes</span></summary><p>Only keep necessary info, limit access, store securely.</p></details>
+      </div>
+      <div class="panel">
+        <h2>Common Mistakes</h2>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Shared logins</span></summary><p>Each staff member should have their own login credentials.</p></details>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Leaving files open</span></summary><p>Lock screens and secure paper records when unattended.</p></details>
+        <details><summary><span class="sumline"><span class="caret">▶</span> Keeping data too long</span></summary><p>Review and securely delete outdated client records regularly.</p></details>
+      </div>
+    </section>
 
     <section class="panel">
       <div class="row"><h2>Compliance Checklist</h2><span class="muted" id="progText">0% complete</span></div>
@@ -64,23 +112,23 @@
       <div class="checklist" id="checklist"></div>
     </section>
 
-    <footer class="muted">Interactive infographic · Muted colour blocks · All text black · Background pattern covers the full page</footer>
+    <footer class="muted">Interactive infographic · Data Protection for Hair Professionals · Muted design, black text, subtle background</footer>
   </div>
 
   <script>
     const CHECKS = [
-      'We have a short written data protection policy and train staff on it',
-      'We collect only necessary client data and keep it accurate',
-      'We secure devices and paper records (passwords, locks, backups)',
-      'We provide a clear privacy notice and obtain consent for marketing',
-      'We have a retention schedule and delete old records',
-      'We can handle client access/correction/deletion requests',
-      'We log incidents and have a simple response process'
+      'We provide clear privacy notices',
+      'We train staff on data protection',
+      'We secure both digital and paper records',
+      'We gain client consent for marketing',
+      'We regularly review and delete old data',
+      'We prepare for client data access/deletion requests',
+      'We follow UK GDPR and Data Protection Act 2018'
     ];
     const list=document.getElementById('checklist');
     const bar=document.getElementById('bar');
     const progText=document.getElementById('progText');
-    const KEY='dp_checklist_v2';
+    const KEY='dp_checklist_v3';
 
     function renderChecklist(){
       const saved=JSON.parse(localStorage.getItem(KEY)||'[]');

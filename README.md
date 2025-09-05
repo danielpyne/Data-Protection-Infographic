@@ -1,14 +1,10 @@
-# Data Protection for Hair Professionals — Muted Infographic (No Slider / Reset)
-
-## Changes
-- Removed background intensity slider.
-- Removed reset checklist option.
+# Data Protection for Hair Professionals — Muted, Interactive Infographic
 
 ## Features
-- Muted background cards with black text.
-- Full-page subtle background pattern.
-- Compliance checklist with progress bar (saves locally).
-- Accordions, panels, and interactivity retained.
+- Covers **legislation (UK GDPR, Data Protection Act 2018)**, why it matters, common risks, correct practices.
+- Muted background cards with black text for readability.
+- Subtle patterned background covering the full page.
+- Interactive elements: scenarios, common mistakes, expandable panels, persistent checklist with progress bar.
 
 ## Publish
 1. Create a GitHub repo and upload `index.html` (and this README).
